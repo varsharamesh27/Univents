@@ -1,3 +1,7 @@
+DATA MODEL: 
+
+![image](https://github.com/varsharamesh27/Univents/assets/58926214/51344ef2-6989-41c4-a6cd-311889607a21)
+
 SQL Queries:
 
 SIMPLE QUERIES: 

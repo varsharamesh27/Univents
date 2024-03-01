@@ -1,0 +1,29 @@
+from pymongo import MongoClient
+
+Requires the PyMongo package.
+https://api.mongodb.com/python/current
+client = MongoClient('mongodb://localhost:27017/') result = client['univents_nosql']['event_venue'].aggregate([ { '$match': { 'University': 'New York University' } }, { '$group': { '_id': '$University', 'eventCount': { '$sum': 1 } }} ])
+
+-- List of event venues and count of events happening at each venue at Stanford University
+
+from pymongo import MongoClient
+
+Requires the PyMongo package.
+https://api.mongodb.com/python/current
+client = MongoClient('mongodb://localhost:27017/') result = client['univents_nosql']['event_venue'].aggregate([ { '$match': { 'University': 'Stanford University' } }, { '$group': { '_id': '$VenueName', 'Number of Events': { '$sum': 1 } } } ])
+
+-- Number of students per major at Northeastern University
+
+from pymongo import MongoClient
+
+Requires the PyMongo package.
+https://api.mongodb.com/python/current
+client = MongoClient('mongodb://localhost:27017/') result = client['univents_nosql']['user'].aggregate([ { '$match': { 'User_type': 'student' } }, { '$lookup': { 'from': 'student', 'localField': 'UserID', 'foreignField': 'StudentID', 'as': 'student_data' } }, { '$unwind': '$student_data' }, { '$match': { 'University': 'Northeastern University' } }, { '$group': { '_id': '$student_data.Major', 'StudentCount': { '$sum': 1 } } } ])
+
+-- Number of events attended by Mark
+
+from pymongo import MongoClient
+
+Requires the PyMongo package.
+https://api.mongodb.com/python/current
+client = MongoClient('mongodb://localhost:27017/') result = client['univents_nosql']['userdetailswitheventcount'].aggregate([ { '$match': { 'First_Name': 'Mark' } }, { '$group': { '_id': '$Last_Name', 'EventCount': { '$sum': '$EventCount' } } } ])
